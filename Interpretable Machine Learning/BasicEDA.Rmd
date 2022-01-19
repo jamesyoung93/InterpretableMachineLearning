@@ -1,0 +1,61 @@
+---
+title: "Untitled"
+author: "James Young"
+date: "1/19/2022"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r, message=FALSE}
+library(readr)
+library(tidyverse)
+library(here)
+library(janitor)
+library(DataExplorer)
+
+load("bike.RData")
+load("ycomments.RData")
+load("cervical.RData")
+cervical <- clean_names(cervical)
+bike <- clean_names(bike)
+ycomments <- clean_names(ycomments)
+
+
+
+plot_missing(bike)
+plot_missing(ycomments)
+plot_missing(cervical)
+
+```
+
+
+```{r}
+plot_bar(bike)
+plot_bar(ycomments)
+plot_bar(cervical)
+
+```
+
+
+```{r}
+plot_histogram(bike)
+
+plot_histogram(cervical)
+```
+
+
+```{r, fig.width= 12, fig.height=8}
+plot_correlation(na.omit(bike), maxcat = 5L)
+
+plot_correlation(na.omit(cervical), maxcat = 5L)
+```
+
+
+
