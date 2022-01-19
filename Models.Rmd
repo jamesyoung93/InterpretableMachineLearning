@@ -1,0 +1,40 @@
+---
+title: "model"
+author: "James Young"
+date: "1/19/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+
+
+```{r}
+library(janitor)
+load("bike.RData")
+bike <- clean_names(bike)
+
+mod <- lm(cnt ~ season + holiday + workingday +weathersit +temp + hum+windspeed+days_since_2011, data = bike)
+summary(mod)
+
+mod_reduced <- lm(cnt ~ season + holiday +weathersit +temp + hum+windspeed+days_since_2011, data = bike)
+summary(mod_reduced)
+```
+
+
+```{r}
+library(janitor)
+load("cervical.RData")
+cervical <- clean_names(cervical)
+
+mod <- glm(biopsy ~ hormonal_contraceptives + smokes + num_of_pregnancies+st_ds_number_of_diagnosis + iud, data = cervical, family = "binomial")
+summary(mod)
+
+mod_reduced <- glm(biopsy ~ st_ds_number_of_diagnosis + iud, data = cervical, family = "binomial")
+summary(mod_reduced)
+```
+
